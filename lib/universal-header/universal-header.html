@@ -3,9 +3,181 @@
 
 <!-- Defines element markup -->
 <dom-module id="universal-header">
+
+    <style>
+
+        .hda-uh{
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: #545454;
+            color: #fff;
+            font-size: 12px;
+            box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 4px rgba(0,0,0,.24);
+        }
+
+        .hda-uh nav {
+            padding: 0;
+        }
+
+        .hda-uh nav>ul {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .hda-uh nav>ul>li {
+            float: left;
+            border-right: 1px solid #3a3a3a;
+        }
+
+        *, ::after, ::before {
+            -moz-box-sizing: inherit;
+            box-sizing: inherit;
+        }
+
+        .hda-uh nav>ul>li>a {
+            display: inline-block;
+        }
+
+        .hda-uh nav>ul>li>a, .hda-uh nav>ul>li>button {
+            color: inherit;
+            font-size: inherit;
+            padding: 9px 20px;
+            height: 36px;
+        }
+
+        .hda-uh a {
+            text-decoration: none;
+        }
+
+        .hda-uh_hda-logo-icon {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+        }
+
+        .hda-uh_hda-logo-icon:before {
+            position: absolute;
+            top: -5px;
+            left: 0;
+            font-size: 20px;
+        }
+        .hda-icon_logo:before, .hda-uh_hda-logo-icon:before {
+            content: "\e605";
+        }
+
+        .btn-group, .hda-uh nav>ul>li.hda-uh_item__has-dropdown {
+            position: relative;
+            vertical-align: middle;
+        }
+
+
+        .hda-uh-dropdown {
+            position: absolute;
+            top: 36px;
+            left: 0;
+            z-index: 1010;
+            display: none;
+            float: left;
+            width: 260px;
+            padding: 12px;
+            margin: 0;
+            font-size: 12px;
+            color: #333;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 4px rgba(0,0,0,.24);
+        }
+
+        .hda-uh-dropdown img {
+            height: 36px;
+            margin-bottom: 6px;
+        }
+
+        .hda-uh-dropdown a {
+            color: #fff;
+        }
+        .hda-uh-dropdown a, .hda-uh_button {
+            display: block;
+            border-radius: 5px;
+            font-size: 14px;
+            padding: 6px;
+            text-align: center;
+        }
+
+        .hda-uh nav>ul>li>a[aria-expanded=true]+.hda-uh-dropdown {
+            display: block;
+        }
+
+
+
+    </style>
+
+
     <template>
-        <p>Hello <strong>from universal header</strong> {{who}}</p>
+        <section class="hda-uh">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="//www.healthdirect.gov.au/" title="General health" data-google-analytics-category="Universal Header,Healthdirect logo" class="hda-uh_hda-logo" aria-label="health direct homepage">
+                            <i aria-hidden="true" class="hda-uh_hda-logo-icon ng-scope" data-ng-if="!$root.isDevice">&nbsp;</i>
+                        </a>
+                    </li>
+                    <li class="hda-uh_item__has-dropdown ng-scope" data-model="showGeneral" on-mouseover='onHovered' on-mouseout='onUnHovered'>
+                        <a href="//www.healthdirect.gov.au/" data-toggle="mouseover-dropdown" aria-haspopup="true" aria-expanded$="{{showGeneral}}">General health</a>
+                        <div class="hda-uh-dropdown">
+                            <img src="images/uh-logo-hda.png" alt="Health direct logo">
+                            <p>Access trusted, quality health information and advice</p>
+                            <a href="//www.healthdirect.gov.au/" data-google-analytics-category="Universal Header,General Health" class="hda-uh_item-visit-hda">Visit healthdirect</a>
+                        </div>
+                    </li>
+                    <li class="hda-uh_item__has-dropdown ng-scope" data-model="pbbSub" on-mouseover='onHovered' on-mouseout='onUnHovered'>
+                        <a href="//www.pregnancybirthbaby.org.au/" data-toggle="mouseover-dropdown" aria-haspopup="true" aria-expanded$="{{pbbSub}}">Pregnancy and parenting</a>
+                        <div class="hda-uh-dropdown">
+                            <img src="images/uh-logo-ppb.png" alt="Parent, pregnancy and birth logo">
+                            <p>Access quality information from pregnancy planning through to early parenthood</p>
+                            <a href="//www.pregnancybirthbaby.org.au/" data-google-analytics-category="Universal Header,Visit Pregnancy Birth and Baby" class="hda-uh_item-visit-pbb">Visit Pregnancy, Birth and Baby</a>
+                        </div>
+                    </li>
+                    <li class="hda-uh_item__has-dropdown ng-scope" data-ng-init="mhcSub=false" data-ng-mouseover="mhcSub=true" data-ng-mouseout="mhcSub=false" data-ng-if="!$root.isDevice">
+                        <a href="//www.mindhealthconnect.org.au/" data-toggle="mouseover-dropdown" aria-haspopup="true" aria-expanded="false">Mental health</a>
+                        <div class="hda-uh-dropdown">
+                            <img src="images/uh-logo-mhc.png" alt="Mindhealth connect logo">
+                            <p>Find trusted mental health and wellbeing information, programs and other support</p>
+                            <a href="//www.mindhealthconnect.org.au/" data-google-analytics-category="Universal Header,Visit mindhealthconnect" class="hda-uh_item-visit-mhc">Visit mindhealthconnect</a>
+                        </div>
+                    </li>
+                    <li class="hda-uh_item__has-dropdown ng-scope" data-ng-init="macSub=false" data-ng-mouseover="macSub=true" data-ng-mouseout="macSub=false" data-ng-if="!$root.isDevice">
+                        <a href="//www.myagedcare.gov.au/" data-toggle="mouseover-dropdown" aria-haspopup="true" aria-expanded="false">Aged care</a>
+                        <div class="hda-uh-dropdown">
+                            <img src="images/uh-logo-mac.png" alt="My aged care logo">
+                            <p>Access information to help you navigate the aged care system</p>
+                            <a href="//www.myagedcare.gov.au/" data-google-analytics-category="Universal Header,Visit My Aged Care" class="hda-uh_item-visit-mac">Visit My Aged Care</a>
+                        </div>
+                    </li>
+                    <li class="hda-uh_item__has-dropdown ng-scope" data-ng-init="macSub=false" data-ng-mouseover="macSub=true" data-ng-mouseout="macSub=false" data-ng-if="!$root.isDevice">
+                        <a href="https://www.carergateway.gov.au/" data-toggle="mouseover-dropdown" aria-haspopup="true" aria-expanded="false">Caring for someone</a>
+                        <div class="hda-uh-dropdown">
+                            <img src="images/uh-logo-carer.png" alt="carer gateway logo">
+                            <p>A great place to start for support and services</p>
+                            <a href="https://www.carergateway.gov.au/" data-google-analytics-category="Universal Header,Visit Carer Gateway" class="hda-uh_item-visit-carer">Visit Carer Gateway</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </section>
     </template>
+
+
+
 </dom-module>
 
 <!-- Registers custom element -->
@@ -16,7 +188,21 @@
             who: {
                 type: String,
                 value: 'Web component'
+            },
+            showGeneral:{
+                type: Object,
+                value: "false"
+            },
+            pbbSub:{
+                type: Object,
+                value: 'false'
             }
+        },
+        onHovered:function(event){
+            this[event.currentTarget.getAttribute('data-model')] = "true";
+        },
+        onUnHovered:function(event){
+            this[event.currentTarget.getAttribute('data-model')] = "false";
         }
     });
 </script>
