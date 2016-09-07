@@ -1,0 +1,22 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+
+<!-- Defines element markup -->
+<dom-module id="universal-header">
+    <template>
+        <p>Hello <strong>from universal header</strong> {{who}}</p>
+    </template>
+</dom-module>
+
+<!-- Registers custom element -->
+<script>
+    Polymer({
+        is: 'universal-header',
+        properties: {
+            who: {
+                type: String,
+                value: 'Web component'
+            }
+        }
+    });
+</script>
