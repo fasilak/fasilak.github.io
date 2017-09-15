@@ -14,3 +14,6 @@ website/.bower-registry
 website/.bower-tmp
 hin_delivery.sublime-project
 hin_delivery.sublime-workspace
+
+learn/node_modules
+
